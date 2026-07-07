@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Integracion con Teller.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.teller.io/connect/connect.js"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; }
+    button { font-size: 16px; padding: 10px 18px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
+    section { margin-top: 32px; }
+    .account { border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Conectar cuenta bancaria con Teller</h1>
+  <p>Este es un cliente de demostracion para la integracion real con la API de Teller.io.</p>
+
+  <button id="connect-btn">Conectar cuenta</button>
+  <p id="status"></p>
+
+  <section id="accounts-section" hidden>
+    <h2>Cuentas</h2>
+    <div id="accounts"></div>
+  </section>
+
+  <script>
+    async function getConfig() {
+      const res = await fetch('/api/config');
+      return res.json();
+    }
+
+    async function loadAccounts() {
+      const res = await fetch('/api/accounts');
+      const data = await res.json();
+
+      if (!res.ok) {
+        document.getElementById('status').textContent = `Error: ${data.error}`;
+        return;
+      }
+
+      const section = document.getElementById('accounts-section');
+      const container = document.getElementById('accounts');
+      container.innerHTML = '';
+      section.hidden = false;
+
+      for (const account of data) {
+        const div = document.createElement('div');
+        div.className = 'account';
+        div.innerHTML = `
+          <strong>${account.institution.name}</strong> - ${account.name} (${account.last_four})
+          <br />
+          <button data-account="${account.id}" class="load-transactions">Ver transacciones</button>
+          <pre class="transactions" data-account-pre="${account.id}" hidden></pre>
+        `;
+        container.appendChild(div);
+      }
+
+      document.querySelectorAll('.load-transactions').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const accountId = btn.dataset.account;
+          const res = await fetch(`/api/accounts/${accountId}/transactions`);
+          const transactions = await res.json();
+          const pre = document.querySelector(`[data-account-pre="${accountId}"]`);
+          pre.hidden = false;
+          pre.textContent = JSON.stringify(transactions, null, 2);
+        });
+      });
+    }
+
+    async function init() {
+      const config = await getConfig();
+
+      if (!config.applicationId) {
+        document.getElementById('status').textContent =
+          'Falta configurar TELLER_APPLICATION_ID en el servidor (ver .env.example).';
+        document.getElementById('connect-btn').disabled = true;
+        return;
+      }
+
+      const tellerConnect = TellerConnect.setup({
+        applicationId: config.applicationId,
+        environment: config.environment,
+        onSuccess: async (enrollment) => {
+          document.getElementById('status').textContent = 'Cuenta conectada. Cargando...';
+
+          await fetch('/api/enrollment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              accessToken: enrollment.accessToken,
+              enrollmentId: enrollment.enrollment.id,
+              institution: enrollment.enrollment.institution.name,
+            }),
+          });
+
+          document.getElementById('status').textContent = `Conectado a ${enrollment.enrollment.institution.name}`;
+          await loadAccounts();
+        },
+        onExit: () => {
+          document.getElementById('status').textContent = 'Conexion cancelada.';
+        },
+      });
+
+      document.getElementById('connect-btn').addEventListener('click', () => {
+        tellerConnect.open();
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>

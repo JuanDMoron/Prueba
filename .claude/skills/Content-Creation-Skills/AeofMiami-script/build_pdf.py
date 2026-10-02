@@ -56,6 +56,11 @@ note_style = ParagraphStyle(
     "Note", parent=styles["Normal"], fontSize=9.5, textColor=colors.HexColor("#555555"),
     fontName="Helvetica-Oblique", spaceAfter=4,
 )
+estado_style = ParagraphStyle(
+    "Estado", parent=styles["Normal"], fontSize=10, textColor=colors.white,
+    fontName="Helvetica-Bold", spaceAfter=10, backColor=colors.HexColor("#C00000"),
+    borderPadding=(3, 6, 3, 6),
+)
 
 
 def add_guion(story, g):
@@ -65,10 +70,19 @@ def add_guion(story, g):
         meta += f" · Duración objetivo: {g['duracion']}"
     story.append(Paragraph(meta, guion_meta_style))
 
+    if g.get("estado"):
+        story.append(Paragraph(g["estado"].upper(), estado_style))
+
     story.append(Paragraph("GUION", section_style))
     for item in g["planos"]:
         label, desc = item[0], item[1]
-        lines = item[2] if isinstance(item[2], list) else [item[2]]
+        raw = item[2]
+        if raw is None:
+            lines = []
+        elif isinstance(raw, list):
+            lines = raw
+        else:
+            lines = [raw]
         trans_before = item[3] if len(item) > 3 else None
         if trans_before:
             story.append(Paragraph(trans_before, transicion_style))

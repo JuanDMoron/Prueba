@@ -128,6 +128,7 @@ GUIONES = [
         "titulo": "R U Guys Real??",
         "pilar": "Confianza",
         "duracion": "~35-40s",
+        "estado": "Pendiente de grabar",
         "planos": [
             ("PLANO 1", "Ella mirando directo a cámara, tono personal, hook completo de un tirón", "Muchos preguntan si de verdad somos reales... así que ven, te voy a enseñar AE OF MIAMI por dentro."),
             ("PLANO 2", "Área de subastas", "Aquí es donde compramos los carros, en subasta, todos los días. Este proceso es el que nos permite tener tanta variedad en el lote.", "[Corte — caminando hacia la primera área]"),
@@ -223,5 +224,28 @@ GUIONES = [
         "notas": "necesita un carro real, con llave a mano, que efectivamente encienda sin problema — idealmente uno con daño cosmético visible (para que el contraste “se ve mal pero prende bien” tenga fuerza), confirmado de antemano por el equipo mecánico.",
         "hook_planos": "Planos 1–2",
         "cta_planos": "Plano 8",
+    },
+    {
+        "numero": 7,
+        "titulo": "Recorrido del Dealer (B-roll / Paneo musical)",
+        "pilar": "Variedad / Branding — sin diálogo",
+        "duracion": "~20-30s",
+        "estado": "Placeholder — falta desarrollar a detalle",
+        "planos": [
+            ("PLANO 1", "Toma amplia del letrero AE OF MIAMI", None),
+            ("PLANO 2", "Paneo por el lote, fila de carros", None),
+            ("PLANO 3", "Detalle: alguien caminando entre los carros / manos revisando un carro", None),
+            ("PLANO 4", "Taller — mecánicos trabajando", None),
+            ("PLANO 5", "Área eléctrica", None),
+            ("PLANO 6", "Oficina / equipo", None),
+            ("PLANO 7", "Cierre — carro arrancando o saliendo del lote, cámara lenta", None),
+            ("PLANO 8", "Card de cierre con texto en pantalla", "aeofmiami.com"),
+        ],
+        "hooks": [],
+        "ctas": [],
+        "notas": [
+            "Placeholder — este video es solo un recordatorio para el conteo, todavía falta desarrollarlo a detalle (selección final de tomas, música, duración exacta del edit).",
+            "100% visual, sin diálogo ni voz en off — es un edit con música. El único texto en pantalla es el card de cierre.",
+        ],
     },
 ]

@@ -231,6 +231,9 @@ GUIONES = [
         "pilar": "Variedad / Branding — sin diálogo",
         "duracion": "~20-30s",
         "estado": "Placeholder — falta desarrollar a detalle",
+        "referencias": [
+            {"link": 'https://www.instagram.com/reels/DdrX4YNgjvd/', "trend": 'Para la variante sugerida. Trend "Cuando el vendedor empieza a grabar un audio": un vendedor graba una nota de voz larguísima mientras recorre todo el dealer (se sienta en un carro, se mete en el maletero, se sirve café, sale a la calle). Sin diálogo, solo música y ese texto en pantalla. 22 s, corte cada ~2.5 s.'},
+        ],
         "planos": [
             ("PLANO 1", "Toma amplia del letrero AE OF MIAMI", None),
             ("PLANO 2", "Paneo por el lote, fila de carros", None),
@@ -321,6 +324,9 @@ GUIONES = [
         "pilar": "Educativo",
         "duracion": "~30s",
         "estado": "Draft — pendiente de correcciones",
+        "referencias": [
+            {"link": 'https://www.instagram.com/reels/DcHEMTTpWUz/', "trend": 'Formato "get ready with me": una novia le habla a cámara desde la misma silla mientras se prepara, y entre frase y frase salta al siguiente momento del día (maquillaje, vestido, ceremonia, fiesta) hasta terminar en el baile. 19 s, corte cada ~2 s.'},
+        ],
         "planos": [
             ("PLANO 1", "Ella sentada siempre en el mismo lugar (silla en el lote u oficina), plano medio fijo, mirando a cámara. Este plano es el \u201cancla\u201d al que se vuelve entre cada paso", "Hoy me llevo mi carro. Vente conmigo."),
             ("PLANO 2", "Llegando al lote, caminando entre los carros", "Lo vi en la página el martes...", "[Corte]"),
@@ -363,6 +369,9 @@ GUIONES = [
         "pilar": "Entretenimiento / Urgencia (trend)",
         "duracion": "~20s",
         "estado": "Draft — pendiente de correcciones",
+        "referencias": [
+            {"link": 'https://www.instagram.com/reels/Dc6-YFohOnI/', "trend": 'Trend "el trato" (Toyota de Hollywood): tres personas con lentes de sol, estilo mafia. "Yo sé que tú necesitas un carro pero no tienes carro; yo tengo carros pero no tengo plata; tú me das plata y yo te doy carro, y así todos contentos." 20 s.'},
+        ],
         "planos": [
             ("PLANO 1", "Daniela sentada en una silla de oficina en medio del lote, lentes de sol, dos del equipo de pie detrás con los brazos cruzados (estilo mafia)", "Yo te tengo un trato."),
             ("PLANO 2", "Plano abierto, el letrero de AE of Miami detrás", "Yo sé que tú necesitas un carro...", "[Corte]"),
@@ -402,6 +411,10 @@ GUIONES = [
         "pilar": "Confianza / Entretenimiento",
         "duracion": "~30-35s",
         "estado": "Draft — pendiente de correcciones",
+        "referencias": [
+            {"link": 'https://www.instagram.com/reels/DdwyfsPJMXC/', "trend": 'Sketch en una tienda de cartas: el cliente pregunta algo y la empleada recorre toda la tienda en una sola toma (bodega, escaleras, oficinas, la calle) buscando al único compañero que sabe, y lo trae al mostrador. 49 s, una sola toma sin cortes.'},
+            {"link": 'https://www.instagram.com/reels/DbCaNFNNaO6/', "trend": 'Sketch "POV: it\'s a slow day at the dealership" (Kia, en inglés): el cliente pide a George; el vendedor dice que George murió para quedarse con la venta, y cuando el cliente dice que compra en tres meses, sale a buscar a George. De aquí solo se tomó la idea de pedir a una persona específica. 42 s, corte cada ~2.5 s.'},
+        ],
         "planos": [
             ("PLANO 1", "Un cliente frente a un carro, Daniela atendiéndolo", "¿Y esto me lo pueden enviar a Colombia? (cliente)"),
             ("PLANO 2", "Daniela, pausa corta, sonrisa", "Eso te lo dice Carlos. Ya vengo."),

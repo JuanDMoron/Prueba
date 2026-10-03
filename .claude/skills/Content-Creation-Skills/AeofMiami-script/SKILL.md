@@ -75,6 +75,14 @@ python3 build_pdf.py
 
 Esto lee `guiones_data.py` y genera `AE_of_Miami_Guiones.pdf` en la misma carpeta. Para agregar un guion nuevo, edita `guiones_data.py` siguiendo la estructura de los guiones existentes (lista `GUIONES`, cada uno es un dict con `numero`, `titulo`, `pilar`, `duracion`, `planos`, `hooks`, `ctas`, `notas`).
 
+Campos opcionales por guion: `estado` (si existe, el guion cuenta como pendiente: "Pendiente de grabar", "Draft — pendiente de correcciones", "Placeholder...") y `referencias` (lista de `{"link", "trend"}`). Cuando un guion se basa en un trend o reel de referencia, SIEMPRE poner el link del reel y una descripción corta del trend — el cliente lo pidió así.
+
+Entregables:
+- `python3 build_pdf.py` → todos los guiones. `python3 build_pdf.py --pendientes` → solo los que tienen `estado` (`AE_of_Miami_Guiones_pendientes.pdf`). El cliente hoy solo quiere ver los pendientes.
+- `python3 build_html.py --pendientes` → `ae-of-miami-guiones.html`, publicado como Artifact en https://claude.ai/artifact/AQSryi3sjPLRtbKUjAwFgX (republicar pasando ese `url`). Al cliente a veces no le abre el PDF actualizado (su dispositivo abre la copia vieja): mandar el PDF con un nombre nuevo con fecha, o mandarle el link de la página.
+
+Para transcribir audio de reels: el modelo de HuggingFace está bloqueado en este entorno; el paquete npm `whisper-addon` trae `ggml-base.en.bin` (solo inglés) y se usa con `pip install pywhispercpp`. Para reels en español, leer los subtítulos de los fotogramas.
+
 Antes de generar, verificar que `reportlab` esté instalado (`pip install reportlab` si no). Para revisar visualmente el resultado: `pdftoppm -jpeg -r 100 AE_of_Miami_Guiones.pdf page` y leer las imágenes generadas (requiere `poppler-utils`, instalar con `apt-get install -y poppler-utils` si hace falta).
 
 ## Nota sobre dónde vive este skill

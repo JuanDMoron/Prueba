@@ -1,0 +1,433 @@
+<title>AE of Miami Guiones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* Layout: one reading column; dealer-sign band header, index table, then each script as a section */
+:root{
+  --bg:#f4f4f1; --surface:#ffffff; --ink:#17171b; --muted:#5d5d63; --line:#dcdcd5;
+  --sign:#111114; --signText:#f7f7f2; --yellow:#e9cb1c; --yellowInk:#17171b;
+  --ok:#2f7d4f; --okBg:#e3f1e8; --film:#b2421f; --filmBg:#f8e4dc; --draft:#7a5f00; --draftBg:#fbf1c4;
+  --hold:#55555c; --holdBg:#e9e9ec;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Barlow","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121215; --surface:#1b1b20; --ink:#ececea; --muted:#a3a3a8; --line:#303037;
+  --sign:#0a0a0c; --signText:#f2f2ee; --yellow:#e9cb1c; --yellowInk:#141416;
+  --ok:#7cc79a; --okBg:#1d3326; --film:#f08f6c; --filmBg:#3a2119; --draft:#e9cb1c; --draftBg:#352f12;
+  --hold:#b9b9c0; --holdBg:#2a2a30; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121215; --surface:#1b1b20; --ink:#ececea; --muted:#a3a3a8; --line:#303037;
+  --sign:#0a0a0c; --signText:#f2f2ee; --yellow:#e9cb1c; --yellowInk:#141416;
+  --ok:#7cc79a; --okBg:#1d3326; --film:#f08f6c; --filmBg:#3a2119; --draft:#e9cb1c; --draftBg:#352f12;
+  --hold:#b9b9c0; --holdBg:#2a2a30; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:0 64px}
+.band{background:var(--sign);color:var(--signText)}
+.band .inner{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:28px 0}
+.brand{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.18em;text-transform:uppercase;opacity:.75;margin:0}
+.band h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,7vw,52px);line-height:1;margin:6px 0 10px;text-wrap:balance}
+.band p.sub{margin:0 0 22px;color:var(--signText);opacity:.8;max-width:60ch}
+.strip{background:var(--yellow);color:var(--yellowInk);font-family:var(--display);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px}
+.strip .inner{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:8px}
+h2,h3{font-family:var(--display);text-wrap:balance}
+.idx{margin-top:32px}
+.idx h2{font-size:24px;margin:0 0 12px;text-transform:uppercase;letter-spacing:.06em}
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:13px;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td.n,td.d{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--muted)}
+td a{color:var(--ink);font-weight:600;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.status{display:inline-block;font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:3px;white-space:nowrap}
+.status.ok{color:var(--ok);background:var(--okBg)}
+.status.film{color:var(--film);background:var(--filmBg)}
+.status.draft{color:var(--draft);background:var(--draftBg)}
+.status.hold{color:var(--hold);background:var(--holdBg)}
+.guion{margin-top:56px;padding-top:24px;border-top:3px solid var(--ink)}
+.g-head{display:flex;gap:16px;align-items:flex-start}
+.g-num{font-family:var(--display);font-weight:700;font-size:48px;line-height:.9;background:var(--yellow);color:var(--yellowInk);padding:6px 10px 4px;border-radius:3px;font-variant-numeric:tabular-nums}
+.g-titles{min-width:0}
+.g-titles h2{font-size:clamp(26px,5vw,34px);line-height:1.05;margin:0 0 8px}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:14px;color:var(--muted);border:1px solid var(--line);border-radius:3px;padding:1px 8px;background:var(--surface)}
+.planos{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:10px}
+.plano{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:6px}
+.p-label{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.p-n{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:14px;white-space:nowrap}
+.p-desc{color:var(--muted);font-size:15px;min-width:0}
+.lines{display:grid;gap:2px}
+.line{margin:0;font-size:18px;line-height:1.45}
+.noline{margin:0;font-size:14px;color:var(--muted);font-style:italic}
+.trans{font-size:13px;color:var(--muted);font-style:italic;padding-left:14px;letter-spacing:.02em}
+.trans::before{content:"↓ ";font-style:normal}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:28px}
+.opt{min-width:0}
+.opt h3,.notas h3{font-size:18px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px}
+.where{font-family:var(--body);font-size:13px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)}
+.opt ol{margin:0;padding-left:22px;display:grid;gap:6px}
+.ref{margin-top:18px;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+.ref h3{font-size:15px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px;color:var(--muted)}
+.ref ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ref a{font-weight:600;color:var(--ink);text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px;word-break:break-all}
+.ref p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.ref.none p{margin:0}
+.notas{margin-top:24px;padding:14px 16px;border-left:4px solid var(--yellow);background:var(--surface);border-radius:0 6px 6px 0}
+.notas ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--muted);font-size:15px}
+.top{display:inline-block;margin-top:16px;font-size:14px;color:var(--muted)}
+@media (max-width:600px){table{min-width:0}.pil,.d{display:none}}
+@media (max-width:480px){.g-num{font-size:36px}.line{font-size:17px}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+<div class="band"><div class="inner">
+<p class="brand">AE of Miami</p>
+<h1>Guiones para reels</h1>
+<p class="sub">Videos pendientes por grabar. Diálogo por plano, referencia, opciones de hook y de CTA, y notas de producción. Presenta: Daniela.</p>
+</div>
+<div class="strip"><div class="inner">7 videos · 1 pendiente de grabar · 5 drafts · 1 placeholder</div></div>
+</div>
+<main class="wrap">
+<section class="idx" id="indice">
+<h2>Índice</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>#</th><th>Guion</th><th class="pil">Pilar</th><th class="d">Duración</th><th>Estado</th></tr></thead>
+<tbody><tr><td class="n">04</td><td><a href="#g4">R U Guys Real??</a></td><td class="pil">Confianza</td><td class="d">~35-40s</td><td><span class="status film">Pendiente de grabar</span></td></tr><tr><td class="n">07</td><td><a href="#g7">Recorrido del Dealer (B-roll / Paneo musical)</a></td><td class="pil">Variedad / Branding — sin diálogo</td><td class="d">~20-30s</td><td><span class="status hold">Placeholder</span></td></tr><tr><td class="n">08</td><td><a href="#g8">Do You Guys Negotiate?</a></td><td class="pil">Objeción / Confianza</td><td class="d">~30s</td><td><span class="status draft">Draft</span></td></tr><tr><td class="n">09</td><td><a href="#g9">Can Someone Pick It Up for Me?</a></td><td class="pil">Educativo / Alcance</td><td class="d">~30s</td><td><span class="status draft">Draft</span></td></tr><tr><td class="n">10</td><td><a href="#g10">De que te guste hasta que te lo llevas</a></td><td class="pil">Educativo</td><td class="d">~30s</td><td><span class="status draft">Draft</span></td></tr><tr><td class="n">11</td><td><a href="#g11">El Trato</a></td><td class="pil">Entretenimiento / Urgencia (trend)</td><td class="d">~20s</td><td><span class="status draft">Draft</span></td></tr><tr><td class="n">12</td><td><a href="#g12">¿Quién sabe de esto?</a></td><td class="pil">Confianza / Entretenimiento</td><td class="d">~30-35s</td><td><span class="status draft">Draft</span></td></tr></tbody></table></div>
+</section>
+<section class="guion" id="g4">
+<header class="g-head">
+<span class="g-num">04</span>
+<div class="g-titles">
+<h2>R U Guys Real??</h2>
+<div class="meta"><span class="chip">Confianza</span><span class="chip">~35-40s</span><span class="status film">Pendiente de grabar</span></div>
+</div></header>
+<aside class="ref none"><h3>Referencia</h3><p>Sin trend de referencia. Idea propia.</p></aside>
+<ol class="planos">
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 1</span><span class="p-desc">Ella mirando directo a cámara, tono personal, hook completo de un tirón</span></div>
+<div class="lines"><p class="line">“Muchos preguntan si de verdad somos reales... así que ven, te voy a enseñar AE OF MIAMI por dentro.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte — caminando hacia la primera área</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 2</span><span class="p-desc">Área de subastas</span></div>
+<div class="lines"><p class="line">“Aquí es donde compramos los carros, en subasta, todos los días. Este proceso es el que nos permite tener tanta variedad en el lote.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 3</span><span class="p-desc">Lote / inventario</span></div>
+<div class="lines"><p class="line">“Y este es nuestro inventario. Cada carro que ves aquí pasó por nuestras manos antes de llegar a este punto.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 4</span><span class="p-desc">Taller, mecánicos y electricistas trabajando</span></div>
+<div class="lines"><p class="line">“Aquí están nuestros mecánicos y nuestro equipo eléctrico, trabajando en los carros todos los días. Esto no se arregla solo.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 5</span><span class="p-desc">Oficina / marketing</span></div>
+<div class="lines"><p class="line">“Y aquí está el equipo que hace que todo esto llegue a tus redes: marketing, ventas, oficina. Gente real, trabajando todos los días.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte, vuelve a ella</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 6</span><span class="p-desc">Plano medio, tono firme, mensaje central</span></div>
+<div class="lines"><p class="line">“Sí somos reales. Sí existimos. Aquí estamos, y estos son nuestros carros.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 7</span><span class="p-desc">Cierre fijo a cámara</span></div>
+<div class="lines"><p class="line">“Visita aeofmiami.com, revisa nuestro inventario y habla directamente con uno de nuestros vendedores.”</p></div>
+</li>
+</ol>
+<div class="opts"><div class="opt"><h3>Opciones de hook <span class="where">Plano 1</span></h3><ol><li>Muchos preguntan si de verdad somos reales... así que ven, te voy a enseñar AE OF MIAMI por dentro.</li><li>¿Ustedes son reales o esto es una estafa? Nos preguntan esto todos los días. Te lo voy a mostrar.</li><li>Sí, hay gente que cree que esto es un fraude. Ven, te enseño por qué no lo es.</li><li>Detrás de esta página hay algo que casi nadie ve. Te lo muestro.</li><li>No somos solo una página. Ven a ver todo lo que hay detrás.</li></ol></div><div class="opt"><h3>Opciones de CTA <span class="where">Plano 7</span></h3><ol><li>Visita aeofmiami.com, revisa nuestro inventario y habla directamente con uno de nuestros vendedores.</li><li>Entra a aeofmiami.com y compruébalo tú mismo.</li><li>El inventario está en aeofmiami.com. Ven o escríbenos — nosotros somos reales.</li><li>Revisa el inventario, habla con nosotros, y compruébalo con tus propios ojos.</li><li>Aeofmiami.com. Ahí está todo. Y aquí estamos nosotros.</li></ol></div></div>
+<div class="notas"><h3>Notas de producción</h3><ul><li>Con frases más largas por parada, este guion corre 35-40 segundos en vez de 30. Para dejarlo en 30s justos, fusionar el Plano 4 y 5 en una sola parada, o quitar una de las 5 áreas.</li><li>Necesita coordinación previa con cada equipo (subastas, mecánica, eléctrico, marketing, oficina) para que estén trabajando naturalmente cuando pase la cámara — no debe sentirse posado.</li></ul></div>
+<a class="top" href="#indice">Volver al índice</a>
+</section><section class="guion" id="g7">
+<header class="g-head">
+<span class="g-num">07</span>
+<div class="g-titles">
+<h2>Recorrido del Dealer (B-roll / Paneo musical)</h2>
+<div class="meta"><span class="chip">Variedad / Branding — sin diálogo</span><span class="chip">~20-30s</span><span class="status hold">Placeholder</span></div>
+</div></header>
+<aside class="ref"><h3>Referencia</h3><ul><li><a href="https://www.instagram.com/reels/DdrX4YNgjvd/" target="_blank" rel="noopener">instagram.com/reels/DdrX4YNgjvd/</a><p>Para la variante sugerida. Trend &quot;Cuando el vendedor empieza a grabar un audio&quot;: un vendedor graba una nota de voz larguísima mientras recorre todo el dealer (se sienta en un carro, se mete en el maletero, se sirve café, sale a la calle). Sin diálogo, solo música y ese texto en pantalla. 22 s, corte cada ~2.5 s.</p></li></ul></aside>
+<ol class="planos">
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 1</span><span class="p-desc">Toma amplia del letrero AE OF MIAMI</span></div>
+<p class="noline">Sin diálogo</p>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 2</span><span class="p-desc">Paneo por el lote, fila de carros</span></div>
+<p class="noline">Sin diálogo</p>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 3</span><span class="p-desc">Detalle: alguien caminando entre los carros / manos revisando un carro</span></div>
+<p class="noline">Sin diálogo</p>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 4</span><span class="p-desc">Taller — mecánicos trabajando</span></div>
+<p class="noline">Sin diálogo</p>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 5</span><span class="p-desc">Área eléctrica</span></div>
+<p class="noline">Sin diálogo</p>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 6</span><span class="p-desc">Oficina / equipo</span></div>
+<p class="noline">Sin diálogo</p>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 7</span><span class="p-desc">Cierre — carro arrancando o saliendo del lote, cámara lenta</span></div>
+<p class="noline">Sin diálogo</p>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 8</span><span class="p-desc">Card de cierre con texto en pantalla</span></div>
+<div class="lines"><p class="line">“aeofmiami.com”</p></div>
+</li>
+</ol>
+<div class="notas"><h3>Notas de producción</h3><ul><li>Placeholder — este video es solo un recordatorio para el conteo, todavía falta desarrollarlo a detalle (selección final de tomas, música, duración exacta del edit).</li><li>100% visual, sin diálogo ni voz en off — es un edit con música. El único texto en pantalla es el card de cierre.</li><li>Variante sugerida (ref. reel “Cuando el vendedor empieza a grabar un audio”): en vez de tomas sueltas, seguir a alguien del equipo que recorre todo el dealer grabando una nota de voz larguísima — se sienta en un carro, se mete en el maletero, pasa por el taller, sale a la calle. Sigue sin diálogo (solo música + ese texto en pantalla), pero le da un hook y un chiste al recorrido.</li></ul></div>
+<a class="top" href="#indice">Volver al índice</a>
+</section><section class="guion" id="g8">
+<header class="g-head">
+<span class="g-num">08</span>
+<div class="g-titles">
+<h2>Do You Guys Negotiate?</h2>
+<div class="meta"><span class="chip">Objeción / Confianza</span><span class="chip">~30s</span><span class="status draft">Draft</span></div>
+</div></header>
+<aside class="ref none"><h3>Referencia</h3><p>Sin trend de referencia. Idea propia.</p></aside>
+<ol class="planos">
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 1</span><span class="p-desc">Ella, tono casi cómplice</span></div>
+<div class="lines"><p class="line">“La pregunta que nadie quiere hacer en voz alta...”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 2</span><span class="p-desc">Remata</span></div>
+<div class="lines"><p class="line">“...¿se puede negociar el precio?”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 3</span><span class="p-desc">Corte, respuesta directa</span></div>
+<div class="lines"><p class="line">“A veces sí.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 4</span><span class="p-desc">Matiza</span></div>
+<div class="lines"><p class="line">“Depende del carro, de cuánto tiempo lleva en el lote, y de cómo llegues a preguntar.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 5</span><span class="p-desc">Consejo práctico</span></div>
+<div class="lines"><p class="line">“Lo peor que puedes hacer es no preguntar.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 6</span><span class="p-desc">Cierre, tono cercano</span></div>
+<div class="lines"><p class="line">“Ven, pregunta, y hablamos como personas normales.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 7</span><span class="p-desc">CTA</span></div>
+<div class="lines"><p class="line">“Escríbenos antes de venir y te decimos si ese carro en específico tiene margen.”</p></div>
+</li>
+</ol>
+<div class="opts"><div class="opt"><h3>Opciones de hook <span class="where">Planos 1–2</span></h3><ol><li>La pregunta que nadie quiere hacer en voz alta... / ...¿se puede negociar el precio?</li><li>¿Se puede bajar el precio? / Depende. Te explico de qué.</li><li>Esto no es un mercado persa... / ...pero tampoco es un precio tallado en piedra.</li><li>Nadie pregunta esto directamente... / ...así que te ahorro la pena.</li><li>¿Regatear funciona aquí? / A veces. Aquí está el cuándo.</li></ol></div><div class="opt"><h3>Opciones de CTA <span class="where">Plano 7</span></h3><ol><li>Escríbenos antes de venir y te decimos si ese carro en específico tiene margen.</li><li>Pregunta. En el peor de los casos, la respuesta es no.</li><li>Ven con la pregunta lista. No muerde.</li><li>Escríbenos el carro que te interesa y hablamos de números.</li><li>No pierdes nada con preguntar. Ven y hazlo.</li></ol></div></div>
+<div class="notas"><h3>Notas de producción</h3><ul><li>Verificar con el cliente qué tan real/frecuente es la negociación antes de grabar — tema delicado si el negocio prefiere mantener precios fijos; ajustar el mensaje a su política real.</li></ul></div>
+<a class="top" href="#indice">Volver al índice</a>
+</section><section class="guion" id="g9">
+<header class="g-head">
+<span class="g-num">09</span>
+<div class="g-titles">
+<h2>Can Someone Pick It Up for Me?</h2>
+<div class="meta"><span class="chip">Educativo / Alcance</span><span class="chip">~30s</span><span class="status draft">Draft</span></div>
+</div></header>
+<aside class="ref none"><h3>Referencia</h3><p>Sin trend de referencia. Idea propia.</p></aside>
+<ol class="planos">
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 1</span><span class="p-desc">Hook</span></div>
+<div class="lines"><p class="line">“No todo el mundo puede venir hasta Miami...”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 2</span><span class="p-desc">Remata</span></div>
+<div class="lines"><p class="line">“...y aun así nos compran carros.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 3</span><span class="p-desc">Explica</span></div>
+<div class="lines"><p class="line">“Puedes mandar a alguien de confianza a recogerlo por ti.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 4</span><span class="p-desc">Sigue</span></div>
+<div class="lines"><p class="line">“O coordinamos el envío directo a tu puerta.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 5</span><span class="p-desc">Refuerza confianza</span></div>
+<div class="lines"><p class="line">“De cualquier forma, te mostramos todo del carro antes de pagar.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 6</span><span class="p-desc">Cierre</span></div>
+<div class="lines"><p class="line">“No importa dónde estés. Hay una forma de hacerlo llegar.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 7</span><span class="p-desc">CTA</span></div>
+<div class="lines"><p class="line">“Escríbenos tu ciudad y te decimos la opción más fácil para ti.”</p></div>
+</li>
+</ol>
+<div class="opts"><div class="opt"><h3>Opciones de hook <span class="where">Planos 1–2</span></h3><ol><li>No todo el mundo puede venir hasta Miami... / ...y aun así nos compran carros.</li><li>¿Vives lejos? / Eso no es un problema aquí.</li><li>No necesitas estar en Miami para comprar en Miami.</li><li>Alguien más puede recoger tu carro por ti. / Así de simple.</li><li>La distancia no es excusa. / Te explico cómo funciona.</li></ol></div><div class="opt"><h3>Opciones de CTA <span class="where">Plano 7</span></h3><ol><li>Escríbenos tu ciudad y te decimos la opción más fácil para ti.</li><li>No importa dónde estés, pregúntanos cómo coordinarlo.</li><li>Dinos a dónde necesitas que llegue, y vemos cómo hacerlo.</li><li>Escríbenos antes de descartar el carro por la distancia.</li><li>Pregunta primero. La logística la resolvemos nosotros.</li></ol></div></div>
+<div class="notas"><h3>Notas de producción</h3><ul><li>Verificar con el cliente los requisitos legales exactos para que un tercero recoja el carro a nombre del comprador (poder, autorización, etc.) antes de grabar.</li></ul></div>
+<a class="top" href="#indice">Volver al índice</a>
+</section><section class="guion" id="g10">
+<header class="g-head">
+<span class="g-num">10</span>
+<div class="g-titles">
+<h2>De que te guste hasta que te lo llevas</h2>
+<div class="meta"><span class="chip">Educativo</span><span class="chip">~30s</span><span class="status draft">Draft</span></div>
+</div></header>
+<aside class="ref"><h3>Referencia</h3><ul><li><a href="https://www.instagram.com/reels/DcHEMTTpWUz/" target="_blank" rel="noopener">instagram.com/reels/DcHEMTTpWUz/</a><p>Formato &quot;get ready with me&quot;: una novia le habla a cámara desde la misma silla mientras se prepara, y entre frase y frase salta al siguiente momento del día (maquillaje, vestido, ceremonia, fiesta) hasta terminar en el baile. 19 s, corte cada ~2 s.</p></li></ul></aside>
+<ol class="planos">
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 1</span><span class="p-desc">Ella sentada siempre en el mismo lugar (silla en el lote u oficina), plano medio fijo, mirando a cámara. Este plano es el “ancla” al que se vuelve entre cada paso</span></div>
+<div class="lines"><p class="line">“Hoy me llevo mi carro. Vente conmigo.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 2</span><span class="p-desc">Llegando al lote, caminando entre los carros</span></div>
+<div class="lines"><p class="line">“Lo vi en la página el martes...”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 3</span><span class="p-desc">Parada frente al carro, lo toca</span></div>
+<div class="lines"><p class="line">“...y hoy lo vine a ver en persona.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 4</span><span class="p-desc">Vuelve al ancla (sentada, a cámara)</span></div>
+<div class="lines"><p class="line">“Primero: revisarlo todo.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 5</span><span class="p-desc">Inspección: le muestran el golpe, abren el capó</span></div>
+<div class="lines"><p class="line">“Me enseñaron el golpe, el motor, todo.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 6</span><span class="p-desc">Ancla</span></div>
+<div class="lines"><p class="line">“Después, el título.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 7</span><span class="p-desc">Detalle: el título en la mano</span></div>
+<div class="lines"><p class="line">“Salvage, reparado. Sin sorpresas.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 8</span><span class="p-desc">Ancla</span></div>
+<div class="lines"><p class="line">“Luego el pago...”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 9</span><span class="p-desc">Detalle: firma de papeles</span></div>
+<div class="lines"><p class="line">“...y firmo.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 10</span><span class="p-desc">Detalle: le entregan las llaves en la mano, reacción</span></div>
+<div class="lines"><p class="line">“Y ahora sí...”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 11</span><span class="p-desc">Plano abierto: sale manejando del lote, la música sube. Es el clímax del video</span></div>
+<div class="lines"><p class="line">“...es mío.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 12</span><span class="p-desc">Cierre fijo a cámara (o card de cierre)</span></div>
+<div class="lines"><p class="line">“Así se ve todo el proceso. Ven y vívelo tú mismo.”</p></div>
+</li>
+</ol>
+<div class="opts"><div class="opt"><h3>Opciones de hook <span class="where">Plano 1</span></h3><ol><li>Hoy me llevo mi carro. Vente conmigo.</li><li>Vi este carro el martes. Hoy es mío.</li><li>Acompáñame a comprar mi carro, de principio a fin.</li><li>Desde que lo vi en la página hasta que me lo llevé. Todo el proceso.</li><li>Así es comprar un carro en AE of Miami. Sin cortes raros, sin letra pequeña.</li></ol></div><div class="opt"><h3>Opciones de CTA <span class="where">Plano 12</span></h3><ol><li>Así se ve todo el proceso. Ven y vívelo tú mismo.</li><li>Así de simple es. Ven cuando quieras empezar.</li><li>Ya sabes los pasos. Ahora falta el carro — ven a elegirlo.</li><li>Nada escondido, nada complicado. Ven a comprobarlo.</li><li>¿Cuál sería el tuyo? Escríbenos y empezamos.</li></ol></div></div>
+<div class="notas"><h3>Notas de producción</h3><ul><li>Estructura tomada del reel de referencia de proceso (el de la novia que se prepara): una persona narra a cámara siempre desde el mismo lugar, y entre cada frase se salta al siguiente paso. El final tiene que sentirse como el gran momento (sale manejando), igual que el baile en la referencia.</li><li>Puede hacerlo Daniela actuando como compradora, o un cliente real que esté comprando ese día (con su permiso) — un cliente real le da mucha más credibilidad.</li><li>Lo que se diga del pago y del título debe coincidir con la política real (pago directo, sin financiamiento) y con el título real de ese carro.</li></ul></div>
+<a class="top" href="#indice">Volver al índice</a>
+</section><section class="guion" id="g11">
+<header class="g-head">
+<span class="g-num">11</span>
+<div class="g-titles">
+<h2>El Trato</h2>
+<div class="meta"><span class="chip">Entretenimiento / Urgencia (trend)</span><span class="chip">~20s</span><span class="status draft">Draft</span></div>
+</div></header>
+<aside class="ref"><h3>Referencia</h3><ul><li><a href="https://www.instagram.com/reels/Dc6-YFohOnI/" target="_blank" rel="noopener">instagram.com/reels/Dc6-YFohOnI/</a><p>Trend &quot;el trato&quot; (Toyota de Hollywood): tres personas con lentes de sol, estilo mafia. &quot;Yo sé que tú necesitas un carro pero no tienes carro; yo tengo carros pero no tengo plata; tú me das plata y yo te doy carro, y así todos contentos.&quot; 20 s.</p></li></ul></aside>
+<ol class="planos">
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 1</span><span class="p-desc">Daniela sentada en una silla de oficina en medio del lote, lentes de sol, dos del equipo de pie detrás con los brazos cruzados (estilo mafia)</span></div>
+<div class="lines"><p class="line">“Yo te tengo un trato.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 2</span><span class="p-desc">Plano abierto, el letrero de AE of Miami detrás</span></div>
+<div class="lines"><p class="line">“Yo sé que tú necesitas un carro...”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 3</span><span class="p-desc">Mismo plano, ella se encoge de hombros</span></div>
+<div class="lines"><p class="line">“...pero no tienes carro.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 4</span><span class="p-desc">Corte, ella señala el lote a su espalda</span></div>
+<div class="lines"><p class="line">“Yo tengo carros...”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 5</span><span class="p-desc">Plano más cerrado, gesto de “pásame la plata”</span></div>
+<div class="lines"><p class="line">“Tú me das el pago...”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 6</span><span class="p-desc">Uno del equipo le entrega unas llaves a cámara</span></div>
+<div class="lines"><p class="line">“...y yo te doy el carro.”</p></div>
+</li>
+<li class="trans" aria-hidden="false">Corte</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 7</span><span class="p-desc">Los tres caminan hacia cámara, se quitan los lentes</span></div>
+<div class="lines"><p class="line">“Y así todos contentos.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 8</span><span class="p-desc">Toma del letrero de AE of Miami, texto en pantalla</span></div>
+<div class="lines"><p class="line">“En AE of Miami.”</p></div>
+</li>
+</ol>
+<div class="opts"><div class="opt"><h3>Opciones de hook <span class="where">Plano 1</span></h3><ol><li>Yo te tengo un trato.</li><li>Te tengo una propuesta que no vas a poder rechazar.</li><li>Siéntate. Vamos a hablar de negocios.</li><li>Esto es lo más simple que vas a escuchar hoy.</li><li>Tengo una oferta. Escucha bien.</li></ol></div><div class="opt"><h3>Opciones de CTA <span class="where">Plano 8</span></h3><ol><li>Escríbenos y cerramos el trato.</li><li>¿Tenemos un trato? Escríbenos.</li><li>Trato hecho. Ven al lote.</li><li>Elige tu carro y hablamos.</li><li>Así de simple. Te esperamos en AE of Miami.</li></ol></div></div>
+<div class="notas"><h3>Notas de producción</h3><ul><li>Adaptación del trend de la referencia (Toyota de Hollywood). Es un video de humor, pero el chiste refuerza algo real de la marca: el pago es directo, sin financiamiento — “tú me das el pago, yo te doy el carro”.</li><li>Si usan el audio original del trend, que sea desde la biblioteca de audio de Instagram (no descargado y vuelto a subir), para que quede licenciado en la plataforma. Si no, se graba con la voz de Daniela siguiendo la misma cadencia.</li><li>En la referencia dicen “pero no tengo plata”; aquí se cambió para que la marca no quede como un negocio que necesita vender a toda costa.</li><li>Vestuario: lentes de sol para los tres, ropa en negro y blanco.</li></ul></div>
+<a class="top" href="#indice">Volver al índice</a>
+</section><section class="guion" id="g12">
+<header class="g-head">
+<span class="g-num">12</span>
+<div class="g-titles">
+<h2>¿Quién sabe de esto?</h2>
+<div class="meta"><span class="chip">Confianza / Entretenimiento</span><span class="chip">~30-35s</span><span class="status draft">Draft</span></div>
+</div></header>
+<aside class="ref"><h3>Referencia</h3><ul><li><a href="https://www.instagram.com/reels/DdwyfsPJMXC/" target="_blank" rel="noopener">instagram.com/reels/DdwyfsPJMXC/</a><p>Sketch en una tienda de cartas: el cliente pregunta algo y la empleada recorre toda la tienda en una sola toma (bodega, escaleras, oficinas, la calle) buscando al único compañero que sabe, y lo trae al mostrador. 49 s, una sola toma sin cortes.</p></li><li><a href="https://www.instagram.com/reels/DbCaNFNNaO6/" target="_blank" rel="noopener">instagram.com/reels/DbCaNFNNaO6/</a><p>Sketch &quot;POV: it&#x27;s a slow day at the dealership&quot; (Kia, en inglés): el cliente pide a George; el vendedor dice que George murió para quedarse con la venta, y cuando el cliente dice que compra en tres meses, sale a buscar a George. De aquí solo se tomó la idea de pedir a una persona específica. 42 s, corte cada ~2.5 s.</p></li></ul></aside>
+<ol class="planos">
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 1</span><span class="p-desc">Un cliente frente a un carro, Daniela atendiéndolo</span></div>
+<div class="lines"><p class="line">“¿Y esto me lo pueden enviar a Colombia? (cliente)”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 2</span><span class="p-desc">Daniela, pausa corta, sonrisa</span></div>
+<div class="lines"><p class="line">“Eso te lo dice Carlos. Ya vengo.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 3</span><span class="p-desc">PLANO SECUENCIA, sin cortes: la cámara sigue a Daniela de espaldas mientras recorre todo el dealer buscándolo — lote, taller, área eléctrica, oficina, subastas. En cada área pregunta y alguien le señala otro lado</span></div>
+<div class="lines"><p class="line">“¿Y Carlos? (Daniela)”</p><p class="line">“¡En el taller! (alguien del equipo)”</p><p class="line">“¿Carlos? (Daniela)”</p><p class="line">“Se fue para la oficina. (alguien del equipo)”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 4</span><span class="p-desc">Lo encuentra y lo jala del brazo de vuelta</span></div>
+<div class="lines"><p class="line">“Te necesitan.”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 5</span><span class="p-desc">Llegan donde el cliente, Daniela sin aire</span></div>
+<div class="lines"><p class="line">“Sí, a Colombia enviamos. Te explico cómo funciona. (Carlos)”</p></div>
+</li>
+<li class="plano">
+<div class="p-label"><span class="p-n">Plano 6</span><span class="p-desc">Cierre: Daniela a cámara</span></div>
+<div class="lines"><p class="line">“Aquí cada pregunta tiene a alguien que la sabe responder.”</p></div>
+</li>
+</ol>
+<div class="opts"><div class="opt"><h3>Opciones de hook <span class="where">Planos 1–2</span></h3><ol><li>¿Y esto me lo pueden enviar a Colombia? / Eso te lo dice Carlos. Ya vengo.</li><li>Texto en pantalla: “Cuando el cliente pregunta algo que solo sabe una persona”</li><li>POV: preguntaste algo muy específico.</li><li>La pregunta era fácil. Encontrar a Carlos, no.</li><li>Ya vengo... (y arranca a correr)</li></ol></div><div class="opt"><h3>Opciones de CTA <span class="where">Plano 6</span></h3><ol><li>¿Tienes una pregunta así de específica? Escríbenos.</li><li>Pregunta lo que quieras. Siempre hay alguien que sabe.</li><li>Escríbenos tu duda y te responde quien sabe.</li><li>Aquí nadie te responde “no sé”. Escríbenos.</li><li>Ven con tus preguntas. Nosotros buscamos a Carlos.</li></ol></div></div>
+<div class="notas"><h3>Notas de producción</h3><ul><li>Combina dos referencias: el reel de la tienda de cartas (ella recorre todo el lugar en una sola toma buscando a su compañero) y el de “buscando a George”. Del segundo no se tomó el chiste (el vendedor miente diciendo que George murió) porque deja al equipo como poco confiable.</li><li>El recorrido de Daniela sirve también como tour del dealer: se ven todas las áreas sin tener que explicarlas.</li><li>“Carlos” es un nombre de ejemplo: usar el nombre real de quien maneja los envíos. Confirmar a qué países envían antes de grabar; la pregunta se puede cambiar por otra duda real (título, garantía, etc.).</li><li>El Plano 3 se graba en una sola toma con gimbal o celular estabilizado.</li></ul></div>
+<a class="top" href="#indice">Volver al índice</a>
+</section>
+</main>

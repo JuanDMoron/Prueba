@@ -4,6 +4,8 @@ Genera AE_of_Miami_Guiones.pdf a partir de guiones_data.py (lista GUIONES).
 Uso: python3 build_pdf.py
 """
 import os
+import sys
+from xml.sax.saxutils import escape
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.lib import colors
@@ -56,6 +58,13 @@ note_style = ParagraphStyle(
     "Note", parent=styles["Normal"], fontSize=9.5, textColor=colors.HexColor("#555555"),
     fontName="Helvetica-Oblique", spaceAfter=4,
 )
+ref_link_style = ParagraphStyle(
+    "RefLink", parent=styles["Normal"], fontSize=10, leading=13, spaceAfter=2, leftIndent=10,
+)
+ref_desc_style = ParagraphStyle(
+    "RefDesc", parent=styles["Normal"], fontSize=10, leading=14, textColor=colors.HexColor("#444444"),
+    spaceAfter=8, leftIndent=10,
+)
 estado_style = ParagraphStyle(
     "Estado", parent=styles["Normal"], fontSize=10, textColor=colors.white,
     fontName="Helvetica-Bold", spaceAfter=10, backColor=colors.HexColor("#C00000"),
@@ -72,6 +81,16 @@ def add_guion(story, g):
 
     if g.get("estado"):
         story.append(Paragraph(g["estado"].upper(), estado_style))
+
+    refs = g.get("referencias")
+    story.append(Paragraph("REFERENCIA", section_style))
+    if refs:
+        for r in refs:
+            link = escape(r["link"])
+            story.append(Paragraph(f'<link href="{link}" color="#C00000"><u>{link}</u></link>', ref_link_style))
+            story.append(Paragraph(escape(r["trend"]), ref_desc_style))
+    else:
+        story.append(Paragraph("Sin trend de referencia — idea propia.", ref_desc_style))
 
     story.append(Paragraph("GUION", section_style))
     for item in g["planos"]:
@@ -111,19 +130,22 @@ def add_guion(story, g):
             story.append(Paragraph(f"Nota de producción: {n}", note_style))
 
 
-def build():
+def build(solo_pendientes=False):
+    guiones = [g for g in GUIONES if g.get("estado")] if solo_pendientes else GUIONES
+    subtitulo = ("Pendientes por grabar — " if solo_pendientes else "") + "hooks, diálogo, planos y CTA"
     story = []
     story.append(Paragraph("AE OF MIAMI", title_style))
-    story.append(Paragraph("Guiones para reels — hooks, diálogo, planos y CTA", subtitle_style))
+    story.append(Paragraph(f"Guiones para reels — {subtitulo}", subtitle_style))
     story.append(HRFlowable(width="100%", thickness=1, color=colors.HexColor("#DDDDDD")))
     story.append(Spacer(1, 10))
 
-    for i, g in enumerate(GUIONES):
+    for i, g in enumerate(guiones):
         if i > 0:
             story.append(PageBreak())
         add_guion(story, g)
 
-    out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "AE_of_Miami_Guiones.pdf")
+    nombre = "AE_of_Miami_Guiones_pendientes.pdf" if solo_pendientes else "AE_of_Miami_Guiones.pdf"
+    out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), nombre)
     doc = SimpleDocTemplate(
         out_path,
         pagesize=letter,
@@ -135,4 +157,4 @@ def build():
 
 
 if __name__ == "__main__":
-    build()
+    build(solo_pendientes="--pendientes" in sys.argv)
